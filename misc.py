@@ -15,7 +15,7 @@ def divide_block(b:Block, cols:int, rows:int )->list:
     for n,l in enumerate(location):
        x = l.x
        y = l.y
-       if (x+cols<w)>0 and (y+rows<h): 
+       if (x+cols<=w) and (y+rows<=h): 
             new_block = Block(b.block[x:x+cols,y:y+rows])  
             new_block.x = x
             new_block.y = y                   

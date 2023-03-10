@@ -71,9 +71,13 @@ class MsaImage:
 
     def set_block(self,index:int,block:Block)->Image:
         '''將block 塞回第index 位置'''
+        x = index%20
+        y = index//20
+        print(f'(x,y)=({x},{y})')
         for i in range(self.cols):
             for j in range(self.rows):
-                self.image[(index-1)*self.cols+i][(index-1)*self.rows+j] = block[i][j]
+                self.image[(y)*64+j][(x)*64+i] = block[i][j]
+
         return self.image        
    
     def get_block_locate(self) -> list:
@@ -94,12 +98,14 @@ class MsaImage:
     def to_binary_image(self) ->Image:
         '''將圖轉為binary'''
         img_bw = cv2.threshold(self.image,127,255,cv2.THRESH_BINARY)[1]
-        threshold =128
+        threshold =127
         img_bw[img_bw>threshold]=1
         return img_bw
     
+    
+    
     @classmethod
-    def reconstruct_image(cls,blocks,cols=64,rows =64, w=3,h=3)->Image:
+    def reconstruct_image(cls,blocks,cols=63,rows =63, w=3,h=3)->Image:
         dst: Image
         dst = np.zeros([rows,cols],dtype=int)
         for block in blocks:
@@ -107,5 +113,8 @@ class MsaImage:
             y = block.y
             for i in range(w):
                 for j in range(h):
-                    dst[x*w+i][y*h+j] = block.block[i][j]            
+                    dst[x*w+i][y*h+j] = block.block[i][j]    
+        cv2.imwrite('watermarker.png',dst)        
         return dst                    
+    
+    

@@ -1,4 +1,7 @@
 import numpy as np
+from image import Image
+import cv2
+
 class Block:
     _x: int
     _y: int
@@ -81,6 +84,16 @@ class Block:
     ''' 轉成np array'''
     def to_np(self):
         return np.array(self.block)
-
+    
+    def block_to_image(self,filename)->Image:
+        cv2.imwrite(filename,self.block)
+       
+        return np.array(self.block)
+    
+    def show_image(self):
+        cv2.imshow('block',self)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    
     def __str__(self):
         return f"x:{self._x}, y:{self._y}, block:{self.block} "        
