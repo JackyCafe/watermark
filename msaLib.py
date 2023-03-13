@@ -71,12 +71,12 @@ class MsaImage:
 
     def set_block(self,index:int,block:Block)->Image:
         '''將block 塞回第index 位置'''
-        x = index%20
-        y = index//20
+        x = index//20
+        y = index%20
         print(f'(x,y)=({x},{y})')
         for i in range(self.cols):
             for j in range(self.rows):
-                self.image[(y)*64+j][(x)*64+i] = block[i][j]
+                self.image[(x)*63+i][(y)*63+j]= block[j][i]
 
         return self.image        
    

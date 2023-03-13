@@ -15,7 +15,7 @@ logging.basicConfig(
     ]
 )
 
-location_block = 3
+location_block = 21
 # watre_mark_image = MsaImage('ncut.png') # 浮水印 image
 cover_image = MsaImage('1.png')  #原圖
 #從1.png 中取63 X 63 的區塊
