@@ -80,7 +80,8 @@ class MsaImage:
         '''
 
         self.locates = []
-        
+        # print(f'w:{self.W}')
+        # print(f'cols:{self.cols}') 
         for i in range(0, self.W, self.cols):
             for j in range(0, self.H, self.rows):
                 p = Point(i, j)
@@ -99,11 +100,11 @@ class MsaImage:
         # block = [[0 for x in range(self.cols)] for y in range(self.rows)]
         for i in range(x, x + self.cols):
             for j in range(y, y + self.rows):
-                 
-                if (x+self.cols<self.W)>0 and (y+self.rows<self.H):
-                    block[i - x][j - y] = self.im[i][j]
-                else:
-                    continue    
+                block[i - x][j - y] = self.im[i][j] 
+                # if (x+self.cols<self.W)>0 and (y+self.rows<self.H):
+                #   block[i - x][j - y] = self.im[i][j]  
+                # else:
+                #     continue    
         block_obj = Block(block)  
         block_obj.x= x
         block_obj.y= y     
